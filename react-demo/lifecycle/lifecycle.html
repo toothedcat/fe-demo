@@ -15,7 +15,14 @@
 <body>
   <div id="container"></div >
   <script type="text/babel">
-
+    var ParentComponent = React.createClass({
+      render:function(){
+        return (
+          <div id={false}>{false}</div>
+        )
+      }
+    })
+    ReactDOM.render(<ParentComponent/>,document.getElementById('container'));
   </script>
 </body>
 </html>
