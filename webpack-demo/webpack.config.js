@@ -164,7 +164,6 @@ var webpackConfig,
   hotModuleReplacementPlugin = new webpack.HotModuleReplacementPlugin();
 /* plugins */
 
-console.log(process.env.NODE_ENV)
 
 
 if(process.env.NODE_ENV == "production"){
@@ -183,8 +182,6 @@ if(process.env.NODE_ENV == "production"){
   };
 }else if(process.env.NODE_ENV == "develop-hot"){
   webpackConfig={
-    devtool:"inline-source-map",
-    debug:true,
     entry:entryHot,
     output:outputHot,
     resolve:resolve,
