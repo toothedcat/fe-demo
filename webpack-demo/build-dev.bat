@@ -1,1 +1,1 @@
-npm run build-dev
+set NODE_ENV=develop&&npm run build-dev

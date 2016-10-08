@@ -10,28 +10,24 @@ var webpackConfig,
 
 /* entry */
   var entry = {
-    bll:"./src/main.jsx",
-    vendor:['react','react-dom']
+    bll:[__dirname + '/src/main.jsx'],
+		vendor:['react','react-dom',"backbone","echarts"]//第三方模块
   };
 
-  var entryHot = {
-    bll:[
-      "webpack-dev-server/client?http://localhost:3001", // WebpackDevServer host and port
-      "webpack/hot/only-dev-server", // "only" prevents reload on syntax errors
-      "./src/main.jsx"
-    ],
-    vendor:['react','react-dom']
-  };
 /* entry */
 
 /* resolve */
   var resolve = {
     extensions:["",".js",".jsx"],
-    alias:{
-      'laydate':path.join(__dirname,'lib/laydate/laydate.js'),
-      "css":path.join(__dirname,"src/css"),
-      "app":path.join(__dirname,"src/app")
-    }
+    alias: {
+			root: path.join(__dirname, "src"),
+			bll: path.join(__dirname, "src/bll"),
+			util: path.join(__dirname, "src/utils"),
+			model: path.join(__dirname, "src/models"),
+			collection: path.join(__dirname, "src/collections"),
+			laydate:path.join(__dirname,'lib/laydate/laydate.js'),
+      terseui:path.join(__dirname,'lib/terseui.js')
+		}
   };
 /* resolve */
 
@@ -72,7 +68,7 @@ var webpackConfig,
   };
   var lessLoader = {
     test: /\.(less|css)$/,
-    loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader",{
+    loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader?sourceMap",{
       publicPath:'../'
     }),
     exclude: /node_modules/
@@ -82,7 +78,7 @@ var webpackConfig,
     loader: 'url-loader',
     exclude: /node_modules/,
     query: {
-      limit: 1024,
+      limit: 8192,
       name:'images/[name].[hash:8].[ext]'
     }
   };
@@ -132,12 +128,15 @@ var webpackConfig,
     from:'lib/laydate/need',
     to:'js/need'
   }]),
+  icoTransferWebpackPlugin = new TransferWebpackPlugin([{
+    from:'src/images/ai.ico',
+    to:'ai.ico'
+  }]),
   //生成HTML文件
   htmlWebpackPlugin = new HtmlWebpackPlugin({
-    title:'webpack打包测试',
+    title:'经营支撑平台',
     template:'src/index.ejs',
     minify:false,
-    //favicon:'src/images/favicon.ico',
     chunksSortMode:function(a,b){
       var orderMap = {
         'vendor':1,
@@ -182,7 +181,7 @@ if(process.env.NODE_ENV == "production"){
   };
 }else if(process.env.NODE_ENV == "develop-hot"){
   webpackConfig={
-    entry:entryHot,
+    entry:entry,
     output:outputHot,
     resolve:resolve,
     module: {
@@ -192,7 +191,8 @@ if(process.env.NODE_ENV == "production"){
       extractTextPlugin,commonsChunkPluginHot,
       providePlugin,transferWebpackPlugin,htmlWebpackPlugin,
       hotModuleReplacementPlugin
-    ]
+    ],
+    devtool: 'eval-source-map'
   };
 }else{
   webpackConfig={
@@ -212,3 +212,4 @@ if(process.env.NODE_ENV == "production"){
 
 
 module.exports = webpackConfig;
+
