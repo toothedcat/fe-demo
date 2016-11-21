@@ -228,6 +228,7 @@ DragTarget.prototype = {
     EventUtil.addHandler(this.dragElement,'mousedown',start);
     EventUtil.addHandler(this.dragElement,'mousemove',move);
     EventUtil.addHandler(this.dragElement,'mouseup',stop);
+    EventUtil.addHandler(this.dragElement,'mouseout',stop);
     var params = that.dragParams,
         dragElement = that.dragElement;
     if(getCss(dragElement, "left") !== "auto"){

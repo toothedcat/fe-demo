@@ -21,14 +21,12 @@ var webpackConfig,
     extensions:["",".js",".jsx"],
     alias: {
 			root: path.join(__dirname, "src"),
-      lib:path.join(__dirname,"lib"),
 			bll: path.join(__dirname, "src/bll"),
 			util: path.join(__dirname, "src/utils"),
 			model: path.join(__dirname, "src/models"),
 			collection: path.join(__dirname, "src/collections"),
 			laydate:path.join(__dirname,'lib/laydate/laydate.js'),
-      terseui:path.join(__dirname,'lib/terseui.js'),
-      jqueryPlugin:path.join(__dirname,'src/util/jquery-wrap.js')
+      terseui:path.join(__dirname,'lib/terseui.js')
 		}
   };
 /* resolve */
@@ -87,10 +85,6 @@ var webpackConfig,
   var exportLoader = {
     test:require.resolve("./lib/laydate/laydate.js"),
     loader:"exports-loader?laydate"
-  };
-  var fontLoader = {
-    test: /\.(eot|woff|ttf)$/,
-    loader: "file-loader"
   };
 /* loaders */
 
@@ -177,11 +171,11 @@ if(process.env.NODE_ENV == "production"){
     output:outputProd,
     resolve:resolve,
     module: {
-      loaders:[babelLoader,lessLoader,urlLoader,exportLoader,fontLoader]
+      loaders:[babelLoader,lessLoader,urlLoader,exportLoader]
     },
     plugins:[
       ugligyJsPlugin,extractTextPluginProd,commonsChunkPluginProd,
-      providePlugin,transferWebpackPlugin,htmlWebpackPlugin,
+      providePlugin,htmlWebpackPlugin,
       cleanWebpackPluginProd,definePlugin
     ]
   };
@@ -191,11 +185,11 @@ if(process.env.NODE_ENV == "production"){
     output:outputHot,
     resolve:resolve,
     module: {
-      loaders:[babelLoaderHot,lessLoader,urlLoader,exportLoader,fontLoader]
+      loaders:[babelLoaderHot,lessLoader,urlLoader,exportLoader]
     },
     plugins:[
       extractTextPlugin,commonsChunkPluginHot,
-      providePlugin,transferWebpackPlugin,htmlWebpackPlugin,
+      providePlugin,htmlWebpackPlugin,
       hotModuleReplacementPlugin
     ],
     devtool: 'eval-source-map'
@@ -206,11 +200,11 @@ if(process.env.NODE_ENV == "production"){
     output:outputDev,
     resolve:resolve,
     module: {
-      loaders:[babelLoader,lessLoader,urlLoader,exportLoader,fontLoader]
+      loaders:[babelLoader,lessLoader,urlLoader,exportLoader]
     },
     plugins:[
       extractTextPlugin,commonsChunkPluginDev,
-      providePlugin,transferWebpackPlugin,htmlWebpackPlugin,
+      providePlugin,htmlWebpackPlugin,
       cleanWebpackPluginDev
     ]
   };
