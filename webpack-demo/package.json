@@ -7,7 +7,7 @@
     "start": "node server.js",
     "test": "test is not avaliable now!",
     "stop": "stop is not avaliable now!",
-    "build-dev": "webpack --progress -v -c --profile -w",
+    "build-dev": "webpack --progress -v -c --profile",
     "build-prod": "webpack --progress -v -c --profile"
   },
   "keywords": [

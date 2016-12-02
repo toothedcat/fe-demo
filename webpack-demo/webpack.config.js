@@ -166,7 +166,17 @@ var webpackConfig,
       NODE_ENV: JSON.stringify(process.env.NODE_ENV),
     }
   }),
-  hotModuleReplacementPlugin = new webpack.HotModuleReplacementPlugin();
+  hotModuleReplacementPlugin = new webpack.HotModuleReplacementPlugin(),
+  errCodeHandler = function(){
+    this.plugin("done", function(stats)
+    {
+      if (stats.compilation.errors && stats.compilation.errors.length && process.argv.indexOf('--watch') == -1)
+      {
+          console.log(stats.compilation.errors);
+          process.exit(1);
+      }
+    });
+  };
 /* plugins */
 
 
@@ -182,7 +192,7 @@ if(process.env.NODE_ENV == "production"){
     plugins:[
       ugligyJsPlugin,extractTextPluginProd,commonsChunkPluginProd,
       providePlugin,transferWebpackPlugin,htmlWebpackPlugin,
-      cleanWebpackPluginProd,definePlugin
+      cleanWebpackPluginProd,definePlugin,errCodeHandler
     ]
   };
 }else if(process.env.NODE_ENV == "develop-hot"){
@@ -211,7 +221,7 @@ if(process.env.NODE_ENV == "production"){
     plugins:[
       extractTextPlugin,commonsChunkPluginDev,
       providePlugin,transferWebpackPlugin,htmlWebpackPlugin,
-      cleanWebpackPluginDev
+      cleanWebpackPluginDev,errCodeHandler
     ]
   };
 }
