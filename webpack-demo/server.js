@@ -4,7 +4,7 @@ var config = require('./webpack.config');
 var ip = "localhost";
 var port = 3001;
 
-// 将执替换js内联进去
+// 将热替换js内联进去
 config.entry.bll.unshift("webpack-dev-server/client?http://"+ip+":"+port);
 config.entry.bll.unshift("webpack/hot/only-dev-server");
 
