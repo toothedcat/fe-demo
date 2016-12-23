@@ -14,7 +14,7 @@
     "default_popup":"popup.html"
   },
   "content_scripts":[{
-    "js":["hello.js"],
+    "js":["./js/init.js"],
     "matches":["https://www.baidu.com/"]
   }]
 }
