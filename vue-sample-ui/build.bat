@@ -1,0 +1,1 @@
+set NODE_ENV=build & npm run build
