@@ -22,7 +22,8 @@
         "$":true,
         "jQuery":true,
         "jquery":true,
-        "jsPlumb":true
+        "jsPlumb":true,
+        "define":true
     },
     "rules": {
         "indent": [//缩进
