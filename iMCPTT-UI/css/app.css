@@ -1,0 +1,307 @@
+body{
+    overflow: hidden;
+}
+/* login */
+    .login{
+        width: 100%;
+        height: 100%;
+        min-width: 1200px;
+        position: relative;
+    }
+    .login-header{
+        width:100%;
+        height: 100px;
+        background-color: #ddd;
+    }
+    .login-body{
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100px;
+        bottom: 60px;
+        background-color: #ccc;
+    }
+    .login-box{
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        right: 50px;
+        top: 200px;
+    }
+    .login-footer{
+        height: 60px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #008888;
+    }
+/* login */
+
+/* schedule */
+    .schedule{
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .schedule-map{
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+/* schedule */
+
+/* schedule-leftpanel */
+    .schedule .leftpanel{
+        position: absolute;
+        height: 100%;
+        width: 250px;
+        top: 0;
+        left:5px;
+        z-index: 2;
+        background-color: #fff;
+    }
+
+
+    .leftpanel .leftpanel-header{
+        height: 50px;
+        background-color: #1234d9;
+    }
+    .leftpanel .leftpanel-switch{
+        background-color: #3456d7;
+    }
+    .leftpanel .leftpanel-switch:after{
+        content: ' ';
+        height: 0;
+        clear: both;
+        display:block;
+        visibility: hidden;
+    }
+
+    .leftpanel .leftpanel-switch .leftpanel-switch-tab{
+        display: inline-block;
+        width: 33%;
+        height: 30px;
+        line-height: 30px;
+        background-color: #ddd;
+        border-right: 1px solid #aaa;
+        float: left;
+        cursor: default;
+    }
+    .leftpanel .leftpanel-switch .leftpanel-switch-tab:hover{
+        background-color: #ccc;
+    }
+
+    .leftpanel .leftpanel-switch .leftpanel-switch-tab:last-child{
+        border-right:none;
+    }
+
+    .leftpanel .leftpanel-switch .leftpanel-switch-tab.leftpanel-switch-tab-active{
+        background-color: #0088ff;
+    }
+    .leftpanel .leftpanel-content{
+        position: absolute;
+        top: 80px;
+        bottom: 150px;
+        width: 100%;
+    }
+    .schedule .leftpanel.leftpanel-collapse{
+        height: 230px;
+    }
+    .schedule .leftpanel.leftpanel-collapse .leftpanel-content{
+        height: 0;
+    }
+    .leftpanel .leftpanel-callpanel{
+        height: 120px;
+        background-color: #a9d7d8;
+        position: absolute;
+        width: 100%;
+        bottom: 30px;
+    }
+    .leftpanel .leftpanel-footer{
+        height: 30px;
+        background-color: #5487a3;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    .leftpanel .leftpanel-footer .leftpanel-toggle{
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-color: #0088ff;
+        position: absolute;
+        right: 10px;
+    }
+
+/* schedule-leftpanel */
+
+
+/* schedule-bottompanel */
+    .schedule .bottompanel{
+        width: 100%;
+        background: #fff;
+        position: absolute;
+        bottom:0;
+        left:50%;
+        transform: translateX(-50%);
+        z-index: 2;
+    }
+    .schedule .bottompanel .bottompanel-switch{
+        display: inline-block;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform:translateX(-50%);
+    }
+    .schedule .bottompanel .bottompanel-switch-tab{
+        display: inline-block;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        background-color: #ddd;
+        border-right: 1px solid #aaa;
+        float: left;
+        cursor: default;
+    }
+    .schedule .bottompanel .bottompanel-switch-tab:hover{
+        background-color: #ccc;
+    }
+    .schedule .bottompanel .bottompanel-switch-tab:last-child{
+        border-right:none;
+    }
+    .schedule .bottompanel .bottompanel-switch-tab.bottompanel-switch-tab-active{
+        background-color: #0088ff;
+    }
+
+    .schedule .bottompanel .bottompanel-content{
+
+    }
+/* schedule-bottompanel */
+
+/* current-alert */
+    .currentalert{
+        height: 200px;
+    }
+    .currentalert .title{
+        height: 30px;
+        border-top: 1px solid #eee;
+        border-bottom: 2px solid #668fD8;
+    }
+    .currentalert .title .title-text{
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 30px;
+        margin-left: 40px;
+    }
+    .currentalert .title .close{
+        display: inline-block;
+        float: right;
+        width: 20px;
+        height: 20px;
+        background-color: #00aaaa;
+    }
+/* current-alert */
+
+/* history-alert */
+    .historyalert{
+        height: 200px;
+    }
+    .historyalert .title{
+        height: 30px;
+        border-top: 1px solid #eee;
+        border-bottom: 2px solid #668fD8;
+    }
+    .historyalert .title .close{
+        display: inline-block;
+        float: right;
+        width: 20px;
+        height: 20px;
+        background-color: #00aaaa;
+    }
+/* history-alert */
+
+/* real-monitor */
+    .realmonitor{
+        height: 200px;
+    }
+    .realmonitor .title{
+        height: 30px;
+        border-top: 1px solid #eee;
+        border-bottom: 2px solid #668fD8;
+    }
+    .realmonitor .title .close{
+        display: inline-block;
+        float: right;
+        width: 20px;
+        height: 20px;
+        background-color: #00aaaa;
+    }
+/* real-monitor */
+
+/* dialog-panel */
+    .schedule .dialoglayer{
+        position: absolute;
+        left:0;
+        top:0;
+        z-index: 3;
+    }
+    .schedule .dialoglayer .callpanel{
+        position: absolute;
+        width: 150px;
+        height: 120px;
+        border:1px solid #515151;
+        background-color: #fff;
+    }
+    .callpanel .callpanel-close{
+        display: inline-block;
+        float: right;
+        width: 16px;
+        height: 16px;
+        background-color: #ff0000;
+    }
+    .callpanel .callpanel-header{
+        padding-top:10px;
+    }
+    .callpanel .callpanel-header:after{
+        content:' ';
+        display:block;
+        clear: both;
+        height: 0;
+        visibility: hidden;
+    }
+    .callpanel .callpanel-header .callpanel-profile{
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border:1px solid #6788ff;
+        border-radius: 50%;
+        position: relative;
+        float: left;
+        margin-left: 30px;
+    }
+
+    .callpanel .callpanel-header .callpanel-name{
+        display: inline-block;
+        float: left;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 5px;
+        margin-left: 10px;
+        vertical-align: top;
+    }
+    .callpanel .callpanel-content{
+        position: relative;
+        width: 100%;
+        padding-top: 10px;
+    }
+    .callpanel .callpanel-content .callpanel-callmode{
+        display: block;
+        margin: 0 auto;
+        width:50px;
+        height: 50px;
+        background-color: rgba(0, 200, 255,0.7);
+        border-radius: 50%;
+    }
+/* dialog-panel */
