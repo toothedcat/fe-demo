@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modal</title>
+    <script src="../lib/vue.js"></script>
+    <link rel="stylesheet" href="dialog.css">
+    <link rel="stylesheet" href="modal.css">
+</head>
+<body>
+    <div>
+        <button id="show-btn">触发</button>
+    </div>
+    <div class="vue-modal"></div>
+    <script src="dialog.js"></script>
+    <script src="modal.js"></script>
+    <script>
+        document.getElementById('show-btn').addEventListener('click',function(){
+            modal.show(Dialog);
+        })
+    </script>
+</body>
+</html>
