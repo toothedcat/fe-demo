@@ -6,11 +6,8 @@
     right: 0;
     z-index:999;
     outline: 0;
-    transition-property: transform,opacity;
-    transition-duration: .3s;
     opacity: 0;
-    transform: scale(1.185);
-    background-color: rgba(51,51,51,.5);
+    background-color: rgba(51,51,51,.0);
     display: none;
 }
 
@@ -19,5 +16,4 @@
     overflow-x: hidden;
     overflow-y: auto;
     opacity: 1;
-    transform: scale(1);
 }

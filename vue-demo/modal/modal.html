@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <title>Modal</title>
     <script src="../lib/vue.js"></script>
-    <link rel="stylesheet" href="dialog.css">
+    <link rel="stylesheet" href="tracedialog/tracedialog.css">
+    <link rel="stylesheet" href="tracehistorydialog/tracehistorydialog.css">
     <link rel="stylesheet" href="modal.css">
 </head>
 <body>
     <div>
-        <button id="show-btn">触发</button>
+        <button id="show-btn">显示TraceDialog</button>
     </div>
     <div class="vue-modal"></div>
-    <script src="dialog.js"></script>
+    <script src="tracedialog/tracedialog.js"></script>
+    <script src="tracehistorydialog/tracehistorydialog.js"></script>
     <script src="modal.js"></script>
     <script>
         document.getElementById('show-btn').addEventListener('click',function(){
-            modal.show(Dialog);
+            modalControl.show(TraceDialog);
         })
     </script>
 </body>
