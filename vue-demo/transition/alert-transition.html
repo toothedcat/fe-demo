@@ -36,15 +36,19 @@
         }
 
         .notify .notify-item .notify-item-desc{
+            float: left;
             font-size: 14px;
         }
         .notify .notify-item .notify-item-state{
+            float: left;
             font-size: 14px;
         }
         .notify .notify-item .notify-item-time{
+            float: right;
             font-size: 14px;
         }
         .notify .notify-item .notify-item-mute{
+            float: right;
             font-size: 14px;
         }
 
@@ -70,9 +74,9 @@
             template:'\
                 <div :class="notifyCls">\
                     <span class="notify-item-desc">[{{itemData.area}}][{{itemData.name}}]</span>\
-                    <span class="notify-item-state">讲话</span>\
-                    <span class="notify-item-time">00:01</span>\
                     <i class="notify-item-mute" v-if="itemData.type === \'call\'"></i>\
+                    <span class="notify-item-time">00:01</span>\
+                    <span class="notify-item-state">讲话</span>\
                 </div>\
             ',
             props:{
