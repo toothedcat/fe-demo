@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var amdOptimize = require('amd-optimize');
+//var amdOptimize = require('amd-optimize');
 var concat = require('gulp-concat');
 
 gulp.task('default',['test','eslint','rjs'],function(){
