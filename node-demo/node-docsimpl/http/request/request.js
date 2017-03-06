@@ -16,7 +16,12 @@ var options = {
         'Content-Type':'application/x-www-form-urlencoded',
         'Content-Length':Buffer.byteLength(postData),
         'Expect':'100-continue'
-    }
+    },
+    auth:'mary:124',
+    agent:null
+    // agent:new http.Agent({
+    //     keepAlive:true
+    // })
 };
 
 let req  = http.request(options, (res) => {
