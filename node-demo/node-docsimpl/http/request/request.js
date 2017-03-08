@@ -15,10 +15,9 @@ var options = {
     headers:{
         'Content-Type':'application/x-www-form-urlencoded',
         'Content-Length':Buffer.byteLength(postData),
-        'Expect':'100-continue'
+        //'Expect':'100-continue'
     },
-    auth:'mary:124',
-    agent:null
+    //auth:'mary:124',
     // agent:new http.Agent({
     //     keepAlive:true
     // })
