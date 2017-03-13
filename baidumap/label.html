@@ -50,6 +50,21 @@
             display: inline-block;
             float: right;
         }
+        .mt-maplabel-header .header-close{
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            right: -12px;
+            top:-10px;
+            background: url(./images/btn_clozepanel.png) 0 0 no-repeat;
+        }
+        .mt-maplabel-header .header-close:hover{
+            background: url(./images/btn_clozepanel.png) 0 -24px no-repeat;
+        }
+        .mt-maplabel-header .header-close:active{
+            background: url(./images/btn_clozepanel.png) 0 -48px no-repeat;
+        }
         .mt-maplabel-body{
             height: 54px;
             line-height: 18px;
@@ -86,6 +101,7 @@ var myLabel = new BMap.Label('\
             <div class="mt-maplabel-header emergency">\
                 <span class="header-desc">警员D</span>\
                 <span class="header-alarm">越界告警</span>\
+                <span class="header-close"></span>\
             </div>\
             <div class="mt-maplabel-body">\
                 <p>18809752681</p>\
@@ -94,7 +110,7 @@ var myLabel = new BMap.Label('\
             </div>\
             <div class="mt-maplabel-footer">\
                 <button class="call-btn">呼叫</button>\
-                <button class="trace-btn">历史轨迹</button>\
+                <button class="locate-btn">取消定位</button>\
             </div>\
         </div>\
     ',
@@ -114,7 +130,23 @@ map.addOverlay(myLabel);                             //把label添加到地图�
 
 
 var infoWindow = new BMap.InfoWindow("<p style='font-size:12px;lineheight:1.8em;'>我是lable打开的信息窗口  <img src='http://dev.baidu.com/wiki/static/static/img/new.gif' /></p>");  // 创建信息窗口对象
-myLabel.addEventListener("click", function(){
-    map.openInfoWindow(infoWindow, point);
+myLabel.addEventListener("click", function(e){
+    var cls = e.domEvent.target.className;
+    if(cls === 'call-btn'){
+        console.log('call')
+    }else if(cls === 'locate-btn'){
+        console.log('cancel locate')
+    }else if(cls === 'header-close'){
+        console.log('close')
+    }else {
+
+    }
+    e.domEvent.stopPropagation();
+    e.domEvent.preventDefault();
 });
+
+// var btn = myLabel.querySelector('.call-btn')
+// btn.onclick = function(){
+//     alert('呼叫')
+// }
 </script>
