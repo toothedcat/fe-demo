@@ -9,6 +9,7 @@ var proxy = http.createServer((request,response) => {
 });
 
 proxy.on('connect',(request,cltSocket,head) => {
+    console.log(request.headers);
     var srvUrl = url.parse(`http://${request.url}`);
     var srvSocket = net.connect(srvUrl.port,srvUrl.hostname, () => {
         // 与目标server建立连接后，代理服务器就可以告诉客户端CONNECT已经成功建立
@@ -16,8 +17,12 @@ proxy.on('connect',(request,cltSocket,head) => {
                     'Proxy-agent: Node.js-Proxy\r\n' +
                     '\r\n');
         srvSocket.write(head);
-        srvSocket.pipe(cltSocket);
+        srvSocket.pipe(cltSocket); 
         cltSocket.pipe(srvSocket);
+    });
+    srvSocket.on('error',(err) => {
+        console.log(err.code);
+        console.log(err.stack);
     });
 });
 
