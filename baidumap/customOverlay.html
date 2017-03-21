@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义标注</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+    <script src="js/userMarker.js"></script>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        html,body,div,p,button,img{
+            margin: 0;
+            padding: 0;
+            outline: 0;
+        }
+        button{
+            border:none;
+            outline: 0;
+        }
+        #map-container{
+            width:1000px;
+            height: 800px;
+            border:1px solid gray;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="map-container"></div>
+    <button id="addMarkerBtn">添加marker</button>
+    <button id="showMarkerBtn">显示marker</button>
+    <button id="hideMarkerBtn">隐藏marker</button>
+    <button id="toggleMarkerBtn">切换显示/隐藏marker</button>
+    <div>
+        <button id="setStateMarkerBtn">设置状态</button>
+        <select name="" id="">
+            <option value="2">越界告警</option>
+        </select>
+    </div>
+    
+    <script>
+        var map = new BMap.Map("map-container");    //创建地图容器
+        var point = new BMap.Point(116.404, 39.915);        //创建一个点
+        map.centerAndZoom(point, 15); 
+        var addMarkerBtn = document.getElementById('addMarkerBtn');
+        var showMarkerBtn = document.getElementById('showMarkerBtn');
+        var hideMarkerBtn = document.getElementById('hideMarkerBtn');
+        var toggleMarkerBtn = document.getElementById('toggleMarkerBtn');
+        var setStateMarkerBtn = document.getElementById('setStateMarkerBtn');
+
+        var userMarker;
+        var addMarker = function(){
+            var userMarker = new UserMarker(116.404, 39.915);     //创建一个标注
+            map.addOverlay(userMarker);
+            return userMarker;
+        }
+
+        addMarkerBtn.addEventListener('click',function(){
+            userMarker = addMarker();
+        });
+        showMarkerBtn.addEventListener('click',function(){
+            if(!userMarker){return;}
+            userMarker.show();
+        });
+        hideMarkerBtn.addEventListener('click',function(){
+            if(!userMarker){return;}
+            userMarker.hide();
+        });
+        toggleMarkerBtn.addEventListener('click',function(){
+            if(!userMarker){return;}
+            userMarker.toggle();
+        });
+        setStateMarkerBtn.addEventListener('click',function(){
+            if(!userMarker){return;}
+            // do something
+        });
+
+        
+    </script>
+</body>
+</html>
