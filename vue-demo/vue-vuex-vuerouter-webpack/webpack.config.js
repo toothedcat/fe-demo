@@ -101,6 +101,7 @@ var definePlugin = new webpack.DefinePlugin({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
     }
 });
+
 var hotModuleReplacementPlugin = new webpack.HotModuleReplacementPlugin();
 
 // Rules
@@ -114,7 +115,12 @@ var eslintRule = {
 
 var babelRule = {
     test: /\.js$/,
-    loader:'babel-loader',
+    use:{
+        loader:'babel-loader',
+        options:{
+            presets:['env']
+        }
+    },
     exclude: /node_modules/
 };
 var vueRule = {
