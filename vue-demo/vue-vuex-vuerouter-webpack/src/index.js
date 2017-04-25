@@ -7,32 +7,30 @@ Vue.use(Vuex);
 
 // 导入浏览器样式重置文件
 import 'assets/reset.css';
+import 'assets/common.css';
+import 'assets/bootstrap/css/bootstrap.min.css';
 
 // 导入组件
-import Login from 'app/login/main.vue';
-import Cluster from 'app/cluster/main.vue';
-import Group from 'app/group/main.vue';
-import User from 'app/user/main.vue';
+import App from 'app/app.vue';
+import Cart from 'app/cart/cart.vue';
+import Goods from 'app/goods/goods.vue';
 
 import navigator from 'utils/navigator';
 
 // 定义路由
-var routes = [{
+const routes = [{
     path:'/',
-    component:Login
+    component:Goods
 }, {
-    path:'/cluster',
-    component:Cluster
+    path:'/cart',
+    component:Cart
 },{
-    path:'/group',
-    component:Group
-},{
-    path:'/user',
-    component:User
+    path:'/goods',
+    component:Goods
 }];
 
-var router = new VueRouter({
-    routes:routes
+const router = new VueRouter({
+    routes
 });
 
 router.beforeEach((to, from, next) => {
@@ -46,7 +44,13 @@ navigator.$on('navigate', (path) => {
     });
 });
 
-var app = new Vue({
-    router:router
+const app = new Vue({
+    router,
+    template:'\
+        <app/>\
+    ',
+    components:{
+        app:App
+    }
 });
 app.$mount('#vue-app');

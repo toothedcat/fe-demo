@@ -12,7 +12,7 @@
             "classes": true,// 允许使用class
             "defaultParams": true,//允许使用函数参数的默认值
             "blockBindings": true,// 块级作用域，允许使用let const
-            "modules": true,// 允许使用模块，模块内默认严格模式
+            "modules": true // 允许使用模块，模块内默认严格模式
         }
     },
     "plugins": [

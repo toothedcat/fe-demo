@@ -18,6 +18,9 @@
         "module": true,
         "require":true
     },
+    "plugins":[
+        "vue"
+    ],
     "rules": {
         "indent": [//缩进
             "error",

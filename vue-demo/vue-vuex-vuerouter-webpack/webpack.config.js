@@ -72,7 +72,7 @@ var transferIcoWebpackPlugin = new TransferWebpackPlugin([{
 }]);
 //生成HTML文件
 var htmlWebpackPlugin = new HtmlWebpackPlugin({
-    title:'MCPTT调度台',
+    title:'vue全家桶',
     template:'src/index.ejs',
     minify:false,
     chunksSortMode:function(a,b){
@@ -150,7 +150,7 @@ var cssRule = {
     exclude: /node_modules/
 };
 var urlRule = {
-    test: /\.(png|jpg|gif)$/,
+    test: /\.(png|jpg|gif|woff|woff2|svg|eot|ttf)$/,
     use: [{
         loader:'url-loader',
         options:{
