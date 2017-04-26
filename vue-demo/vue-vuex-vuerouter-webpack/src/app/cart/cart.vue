@@ -5,7 +5,7 @@
 </style>
 <template>
     <div>
-        <cart></cart>
+        cart
     </div>
 </template>
 <script>

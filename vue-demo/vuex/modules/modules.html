@@ -40,26 +40,24 @@
             }
         }
         const moduleB = {
-            namespaced:true,
             state:{
                 count:0
             },
             mutations:{
-                increment(state){
+                incrementB(state){
                     state.count++;
                 }
             },
             getters:{
-                doubleCount(state,getters,rootState){
+                doubleCountB(state,getters,rootState){
                     return state.count * 2;
                 }
             },
             actions:{
-                increment(context){
+                incrementB(context){
                     return new Promise((resolve,reject) => {
                         setTimeout(()=>{
                             context.commit('increment');
-                            context.commit('increment',null,{root:true});
                             resolve();
                         },1000)
                     })
@@ -84,14 +82,16 @@
         const ModuleA = {
             template:'\
                 <div>\
-                    <p>{{count}}</p>\
+                    <p>count:{{count}},doubleCount:{{doubleCount}}</p>\
                     <button @click="incrementClick">increment</button>\
                 </div>\
             ',
             computed:{
                 count(){
-                    debugger
                     return this.$store.state.moduleA.count;
+                },
+                doubleCount(){
+                    return this.$store.getters['moduleA/doubleCount'];
                 }
             },
             methods:{
@@ -116,12 +116,12 @@
                 },
                 doubleCount(){
                     debugger
-                    return this.$store.getters['moduleB/doubleCount'];
+                    return this.$store.getters['doubleCountB'];
                 }
             },
             methods:{
                 incrementClick(){
-                    this.$store.commit['moduleB/increment'];
+                    this.$store.commit('incrementB');
                     this.$store.commit('increment');
                 }
             }

@@ -33,12 +33,19 @@ var resolve = {
 // output
 
 var outputProd = {
-    path:__dirname+'/dist',
+    path:path.join(__dirname,'dist'),
     filename:'js/[name].[chunkhash:8].min.js',
-    chunkFilename:'other.[id].min.js'
+    chunkFilename:'other.[id].min.js',
+    publicPath:'./'
 };
 var outputDev = {
-    path:__dirname+'/build',
+    path:path.join(__dirname,'build'),
+    filename:'js/[name].[chunkhash:8].js',
+    chunkFilename:'other.[id].js',
+    publicPath:'./'
+};
+var outputServer = {
+    path:path.join(__dirname, '__build__'),
     filename:'js/[name].[chunkhash:8].js',
     chunkFilename:'other.[id].js'
 };
@@ -116,10 +123,7 @@ var eslintRule = {
 var babelRule = {
     test: /\.js$/,
     use:{
-        loader:'babel-loader',
-        options:{
-            presets:['env']
-        }
+        loader:'babel-loader'
     },
     exclude: /node_modules/
 };
@@ -181,7 +185,7 @@ if(process.env.NODE_ENV === 'production'){
     webpackConfig={
         devtool: 'source-map',
         entry:entry,
-        output:outputDev,
+        output:outputServer,
         resolve:resolve,
         module: {
             rules:[eslintRule,babelRule,vueRule,cssRule,lessRule,urlRule]

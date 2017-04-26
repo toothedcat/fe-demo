@@ -40,5 +40,5 @@
                 return 3;
             }
         }
-    }
+    };
 </script>
