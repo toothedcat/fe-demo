@@ -12,7 +12,7 @@ var webpackConfig = null;
 // entry
 
 var entry = {
-    bll:[__dirname + '/src/index.js'],
+    bll:[__dirname + '/src/main.js'],
     vendor:['vue','vue-router','vuex']//第三方模块
 };
 
@@ -22,10 +22,12 @@ var resolve = {
     extensions:['.js','.vue'],
     alias: {
         src:path.join(__dirname, 'src'),
+        api:path.join(__dirname, 'src/api'),
         app:path.join(__dirname, 'src/app'),
         assets:path.join(__dirname, 'src/assets'),
+        route:path.join(__dirname, 'src/route'),
+        store:path.join(__dirname, 'src/store'),
         utils:path.join(__dirname, 'src/utils'),
-        models:path.join(__dirname, 'src/models'),
         vue:'vue/dist/vue.js'
     }
 };
@@ -173,7 +175,7 @@ if(process.env.NODE_ENV === 'production'){
         output:outputProd,
         resolve:resolve,
         module: {
-            rules:[babelRule,vueRule,cssRule,lessRule,urlRule]
+            rules:[eslintRule,babelRule,vueRule,cssRule,lessRule,urlRule]
         },
         plugins:[
             ugligyJsPlugin,extractCssPluginProd,commonsChunkPluginProd,
@@ -188,7 +190,7 @@ if(process.env.NODE_ENV === 'production'){
         output:outputServer,
         resolve:resolve,
         module: {
-            rules:[eslintRule,babelRule,vueRule,cssRule,lessRule,urlRule]
+            rules:[babelRule,vueRule,cssRule,lessRule,urlRule]
         },
         plugins:[
             extractCssPlugin,commonsChunkPlugin,transferIcoWebpackPlugin,

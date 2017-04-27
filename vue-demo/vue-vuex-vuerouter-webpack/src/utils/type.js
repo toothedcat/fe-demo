@@ -1,4 +1,3 @@
-'use strict';
 var class2type = {};
 
 'Boolean Number String Function Array Date RegExp Object Error'.split(' ').forEach((name) => {

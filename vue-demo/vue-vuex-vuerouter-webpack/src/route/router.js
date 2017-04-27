@@ -1,32 +1,23 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Vuex from 'vuex';
-
 Vue.use(VueRouter);
-Vue.use(Vuex);
-
-// 导入浏览器样式重置文件
-import 'assets/reset.css';
-import 'assets/common.css';
-import 'assets/bootstrap/css/bootstrap.min.css';
 
 // 导入组件
-import App from 'app/app.vue';
 import Cart from 'app/cart/cart.vue';
-import Goods from 'app/goods/goods.vue';
+import Products from 'app/products/products.vue';
 
 import navigator from 'utils/navigator';
 
 // 定义路由
 const routes = [{
     path:'/',
-    component:Goods
+    redirect:'/products'
 }, {
     path:'/cart',
     component:Cart
 },{
-    path:'/goods',
-    component:Goods
+    path:'/products',
+    component:Products
 }];
 
 const router = new VueRouter({
@@ -44,13 +35,4 @@ navigator.$on('navigate', (path) => {
     });
 });
 
-const app = new Vue({
-    router,
-    template:'\
-        <app/>\
-    ',
-    components:{
-        app:App
-    }
-});
-app.$mount('#vue-app');
+export default router;

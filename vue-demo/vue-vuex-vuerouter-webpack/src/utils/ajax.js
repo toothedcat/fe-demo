@@ -1,5 +1,5 @@
 'use strict';
-const applyIf = require('./copyUtils.js').applyIf;
+import {applyIf} from './copy';
 
 /**
  * 将data序列化为表单格式（x-www-form-urlencoded）

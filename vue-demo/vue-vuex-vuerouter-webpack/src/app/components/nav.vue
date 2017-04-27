@@ -9,14 +9,12 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand"
-                   href="#"
-                   v-link="{ path: '/' }">Shopping Cart</a>
+                <router-link to="/" class="navbar-brand" href="#">Shopping Cart</router-link>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <router-link to="/goods" tag="li" active-class="active">
+                    <router-link to="/products" tag="li" active-class="active">
                         <a href="#!"> 
                             商品 
                             <span class="sr-only">(current)</span>
@@ -34,11 +32,12 @@
     </nav>
 </template>
 <script>
+    import {mapGetters} from 'vuex';
     export default {
         computed:{
-            totalItem(){
-                return 3;
-            }
+            ...mapGetters({
+                totalItem:'cartProductsCount'
+            })
         }
     };
 </script>
