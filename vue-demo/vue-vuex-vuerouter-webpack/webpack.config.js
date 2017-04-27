@@ -146,9 +146,30 @@ var lessRule = {
     }),
     exclude: /node_modules/
 };
+var lessRuleProd = {
+    test:/\.less$/,
+    loader: extractCssPluginProd.extract({
+        use:[
+            'css-loader?sourceMap',
+            'less-loader?sourceMap'
+        ],
+        fallback:'style-loader',
+        publicPath:'../'
+    }),
+    exclude: /node_modules/
+};
 var cssRule = {
     test: /\.css$/,
     loader: extractCssPlugin.extract({
+        use:'css-loader?sourceMap',
+        fallback:'style-loader',
+        publicPath:'../'
+    }),
+    exclude: /node_modules/
+};
+var cssRuleProd = {
+    test: /\.css$/,
+    loader: extractCssPluginProd.extract({
         use:'css-loader?sourceMap',
         fallback:'style-loader',
         publicPath:'../'
@@ -175,7 +196,7 @@ if(process.env.NODE_ENV === 'production'){
         output:outputProd,
         resolve:resolve,
         module: {
-            rules:[eslintRule,babelRule,vueRule,cssRule,lessRule,urlRule]
+            rules:[eslintRule,babelRule,vueRule,cssRuleProd,lessRuleProd,urlRule]
         },
         plugins:[
             ugligyJsPlugin,extractCssPluginProd,commonsChunkPluginProd,
@@ -183,7 +204,21 @@ if(process.env.NODE_ENV === 'production'){
             cleanDistPlugin,definePlugin
         ]
     };
-}else if(process.env.NODE_ENV === 'server'){
+}else if(process.env.NODE_ENV === 'develop'){
+    webpackConfig={
+        devtool: 'source-map',
+        entry:entry,
+        output:outputDev,
+        resolve:resolve,
+        module: {
+            rules:[eslintRule,babelRule,vueRule,cssRule,lessRule,urlRule]
+        },
+        plugins:[
+            extractCssPlugin,commonsChunkPlugin,transferIcoWebpackPlugin,
+            htmlWebpackPlugin,cleanBuildPlugin,definePlugin
+        ]
+    };
+}else{
     webpackConfig={
         devtool: 'source-map',
         entry:entry,
@@ -198,20 +233,6 @@ if(process.env.NODE_ENV === 'production'){
             definePlugin
         ],
         watch:true
-    };
-}else{
-    webpackConfig={
-        devtool: 'source-map',
-        entry:entry,
-        output:outputDev,
-        resolve:resolve,
-        module: {
-            rules:[eslintRule,babelRule,vueRule,cssRule,lessRule,urlRule]
-        },
-        plugins:[
-            extractCssPlugin,commonsChunkPlugin,transferIcoWebpackPlugin,
-            htmlWebpackPlugin,cleanBuildPlugin,definePlugin
-        ]
     };
 }
 

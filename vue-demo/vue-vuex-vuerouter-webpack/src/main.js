@@ -1,5 +1,8 @@
 import Vue from 'vue';
 
+// 浏览器es6环境
+import 'babel-polyfill';
+
 import router from 'route/router';
 import store from 'store/store';
 
