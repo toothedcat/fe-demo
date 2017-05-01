@@ -12,7 +12,7 @@ var webpackConfig = null;
 // entry
 
 var entry = {
-    bll:[__dirname + '/src/index.js'],
+    bll:[__dirname + '/src/main.js'],
     vendor:['vue','vue-router','vuex']//第三方模块
 };
 
@@ -22,10 +22,12 @@ var resolve = {
     extensions:['.js','.vue'],
     alias: {
         src:path.join(__dirname, 'src'),
+        api:path.join(__dirname, 'src/api'),
         app:path.join(__dirname, 'src/app'),
         assets:path.join(__dirname, 'src/assets'),
+        route:path.join(__dirname, 'src/route'),
+        store:path.join(__dirname, 'src/store'),
         utils:path.join(__dirname, 'src/utils'),
-        models:path.join(__dirname, 'src/models'),
         vue:'vue/dist/vue.js'
     }
 };
@@ -33,12 +35,19 @@ var resolve = {
 // output
 
 var outputProd = {
-    path:__dirname+'/dist',
+    path:path.join(__dirname,'dist'),
     filename:'js/[name].[chunkhash:8].min.js',
-    chunkFilename:'other.[id].min.js'
+    chunkFilename:'other.[id].min.js',
+    publicPath:'./'
 };
 var outputDev = {
-    path:__dirname+'/build',
+    path:path.join(__dirname,'build'),
+    filename:'js/[name].[chunkhash:8].js',
+    chunkFilename:'other.[id].js',
+    publicPath:'./'
+};
+var outputServer = {
+    path:path.join(__dirname, '__build__'),
     filename:'js/[name].[chunkhash:8].js',
     chunkFilename:'other.[id].js'
 };
@@ -72,7 +81,7 @@ var transferIcoWebpackPlugin = new TransferWebpackPlugin([{
 }]);
 //生成HTML文件
 var htmlWebpackPlugin = new HtmlWebpackPlugin({
-    title:'MCPTT调度台',
+    title:'vue全家桶',
     template:'src/index.ejs',
     minify:false,
     chunksSortMode:function(a,b){
@@ -116,10 +125,7 @@ var eslintRule = {
 var babelRule = {
     test: /\.js$/,
     use:{
-        loader:'babel-loader',
-        options:{
-            presets:['env']
-        }
+        loader:'babel-loader'
     },
     exclude: /node_modules/
 };
@@ -140,6 +146,18 @@ var lessRule = {
     }),
     exclude: /node_modules/
 };
+var lessRuleProd = {
+    test:/\.less$/,
+    loader: extractCssPluginProd.extract({
+        use:[
+            'css-loader?sourceMap',
+            'less-loader?sourceMap'
+        ],
+        fallback:'style-loader',
+        publicPath:'../'
+    }),
+    exclude: /node_modules/
+};
 var cssRule = {
     test: /\.css$/,
     loader: extractCssPlugin.extract({
@@ -149,8 +167,17 @@ var cssRule = {
     }),
     exclude: /node_modules/
 };
+var cssRuleProd = {
+    test: /\.css$/,
+    loader: extractCssPluginProd.extract({
+        use:'css-loader?sourceMap',
+        fallback:'style-loader',
+        publicPath:'../'
+    }),
+    exclude: /node_modules/
+};
 var urlRule = {
-    test: /\.(png|jpg|gif)$/,
+    test: /\.(png|jpg|gif|woff|woff2|svg|eot|ttf)$/,
     use: [{
         loader:'url-loader',
         options:{
@@ -169,7 +196,7 @@ if(process.env.NODE_ENV === 'production'){
         output:outputProd,
         resolve:resolve,
         module: {
-            rules:[babelRule,vueRule,cssRule,lessRule,urlRule]
+            rules:[eslintRule,babelRule,vueRule,cssRuleProd,lessRuleProd,urlRule]
         },
         plugins:[
             ugligyJsPlugin,extractCssPluginProd,commonsChunkPluginProd,
@@ -177,23 +204,7 @@ if(process.env.NODE_ENV === 'production'){
             cleanDistPlugin,definePlugin
         ]
     };
-}else if(process.env.NODE_ENV === 'server'){
-    webpackConfig={
-        devtool: 'source-map',
-        entry:entry,
-        output:outputDev,
-        resolve:resolve,
-        module: {
-            rules:[eslintRule,babelRule,vueRule,cssRule,lessRule,urlRule]
-        },
-        plugins:[
-            extractCssPlugin,commonsChunkPlugin,transferIcoWebpackPlugin,
-            htmlWebpackPlugin,hotModuleReplacementPlugin,
-            definePlugin
-        ],
-        watch:true
-    };
-}else{
+}else if(process.env.NODE_ENV === 'develop'){
     webpackConfig={
         devtool: 'source-map',
         entry:entry,
@@ -206,6 +217,22 @@ if(process.env.NODE_ENV === 'production'){
             extractCssPlugin,commonsChunkPlugin,transferIcoWebpackPlugin,
             htmlWebpackPlugin,cleanBuildPlugin,definePlugin
         ]
+    };
+}else{
+    webpackConfig={
+        devtool: 'source-map',
+        entry:entry,
+        output:outputServer,
+        resolve:resolve,
+        module: {
+            rules:[babelRule,vueRule,cssRule,lessRule,urlRule]
+        },
+        plugins:[
+            extractCssPlugin,commonsChunkPlugin,transferIcoWebpackPlugin,
+            htmlWebpackPlugin,hotModuleReplacementPlugin,
+            definePlugin
+        ],
+        watch:true
     };
 }
 

@@ -1,4 +1,3 @@
-import Vue from "vue";
-
-const navigator = new Vue();
+import Vue from 'vue';
+var navigator = new Vue();
 export default navigator;
