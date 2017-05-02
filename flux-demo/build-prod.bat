@@ -1,1 +1,0 @@
-set NODE_ENV=production&&npm run build-prod
