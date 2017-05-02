@@ -1,4 +1,3 @@
-'use strict';
 import {applyIf} from './copy';
 
 /**
@@ -30,8 +29,8 @@ const defaultOptions = {
     async:true
 };
 
-function ajax(options){
-    var opts = applyIf(options,defaultOptions);
+export function ajax(options){
+    var opts = applyIf(options,defaultOptions,true);
     return new Promise((resolve,reject) => {
         if(!window.XMLHttpRequest){
             throw new Error('Browser does not support XMLHttpRequest!');
@@ -41,7 +40,7 @@ function ajax(options){
             if(xhr.status === 200 || xhr.status === 304){
                 let result = JSON.parse(xhr.responseText);
                 if(result.errCode === 0){
-                    resolve(result);
+                    resolve(result.data);
                 }else{
                     reject(result.errMsg);
                 }
@@ -50,10 +49,10 @@ function ajax(options){
                 reject(xhr.statusText);
             }
         };
-        opts.data = params(opts.data);
+        
         opts.method = String(opts.method).toUpperCase();
         if(opts.method === 'GET'){
-            opts.url = opts.url.indexOf('?') === -1 ? '?' + opts.data : '&' + opts.data;
+            opts.url = opts.url.indexOf('?') === -1 ? '?' + params(opts.data) : '&' + opts.data;
         }
         if(opts.async === true){
             xhr.onreadystatechange = function(){
@@ -62,7 +61,9 @@ function ajax(options){
                 }
             };
         }
-        if(opts.headers['Content-Type'] === 'application/json' || 
+        if(opts.headers['Content-Type'].toLowerCase() === 'application/x-www-form-urlencoded'){
+            opts.data = params(opts.data);
+        }else if(opts.headers['Content-Type'].toLowerCase() === 'application/json' || 
             opts.headers['Content-Type'] === 'text/json'){
             opts.data = JSON.stringify(opts.data);
         }
@@ -84,15 +85,9 @@ function ajax(options){
     });
 }
 
-
-
-function postJSON(options){
+export function postJSON(options){
     options.method = 'POST';
+    options.headers = options.headers || {};
     options.headers['Content-Type'] = 'application/json';
     return ajax(options);
 }
-
-module.exports = {
-    ajax:ajax,
-    postJSON:postJSON
-};

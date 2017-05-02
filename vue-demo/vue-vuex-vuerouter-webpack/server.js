@@ -10,7 +10,9 @@ const port = process.env.port || 3001;
 WebpackConfig.entry.bll.unshift('webpack-hot-middleware/client');
 
 const app = express();
+const compression = require('compression');
 const compiler = webpack(WebpackConfig);
+const startMock = require('./mock/index');
 
 
 app.use(webpackDevMiddleware(compiler,{
@@ -24,7 +26,17 @@ app.use(webpackHotMiddleware(compiler,{
     log:false
 }));
 
-app.use(express.static(__dirname+'/__build__/'));
+app.use(compression());
+
+app.use(express.static(__dirname+'/__build__/',{
+    etag:true,
+    index:'index.html',
+    lastModified:true,
+    maxAge:2592000 * 1000 // 30, 86400秒 = 1天
+}));
+
+
+startMock(app);
 
 app.listen(port, ip, (err) => {
     if (err) {

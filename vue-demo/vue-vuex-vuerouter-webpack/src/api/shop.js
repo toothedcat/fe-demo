@@ -1,16 +1,16 @@
-//import {postJSON} from 'utils/ajax.js';
-const products = [
-    {'id': 1, 'title': 'iPad 4 Mini', 'price': 500.01, 'inventory': 2},
-    {'id': 2, 'title': 'H&M T-Shirt White', 'price': 10.99, 'inventory': 10},
-    {'id': 3, 'title': 'Charli XCX - Sucker CD', 'price': 19.99, 'inventory': 5}
-];
+import {postJSON} from 'utils/ajax.js';
 
 export default {
     getProducts(){
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(products);
-            },1000);
+        return new Promise((resolve,reject) => {
+            postJSON({
+                url:'products/getProducts',
+                data:{}
+            }).then((result) => {
+                resolve(result);
+            }).catch((err) => {
+                reject(err);
+            });
         });
     },
     buyProducts(){
