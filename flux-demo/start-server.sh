@@ -1,1 +1,0 @@
-export NODE_ENV=develop-hot&&npm run start
