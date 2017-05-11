@@ -1,1 +1,7 @@
-<h1>User: <%= user %></h1>
+<% if(getUser(req)){ %>
+    <%- include('user/say') %>
+<% } %>
+
+<%- include('user/posts',{posts:posts}) %>
+
+<script src="/js/user.js"></script>
