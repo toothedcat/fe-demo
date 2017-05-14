@@ -8,21 +8,26 @@
     <style>
         #main{
             width:220px;
-            height:300px;
-            border: 1px solid black;
+            height: 300px;
             display: flex;
+            flex-direction: row;
+            flex-wrap:wrap;
+            justify-content: space-around;
+            align-items:stretch;
+            align-content:stretch;
+            border:1px solid #000;
         }
-
         #main div{
-            flex:1;
+            width:100px;
+            flex-grow:1;
         }
     </style>
 </head>
 <body>
     <div id="main">
-        <div style="background-color:red"></div>
-        <div style="background-color:green"></div>
-        <div style="background-color:blue"></div>
+        <div style="background-color:#f00">red</div>
+        <div style="background-color:#0f0">green</div>
+        <div style="background-color:#00f">blue</div>
     </div>
 </body>
 </html>
