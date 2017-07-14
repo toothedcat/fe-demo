@@ -20,6 +20,10 @@
 <v-button type="error">Error</v-button>
 ```
 
+```javascript
+import path from 'path'
+```
+
 ## API
 
 ### Button Props

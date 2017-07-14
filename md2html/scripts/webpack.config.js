@@ -1,9 +1,29 @@
-var webpack = require('webpack');
-var path = require('path');
 
-const md = require('markdown-it')('default');
+var path = require('path');
+var hljs = require('highlight.js');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 var extractLESSPlugin = new ExtractTextPlugin('/docs.css');
+var htmlPlugin = new HtmlWebpackPlugin({
+    filename:'index.html',
+    template:path.join(__dirname,'../src/index.html'),
+    inject:true
+});
+
+const md = require('markdown-it')({
+    highlight:function(str,lang){
+        debugger
+        if(lang && hljs.getLanguage(lang)){
+            let hlStr = '<pre class="hljs"><code>' +
+                hljs.highlight(lang,str).value +
+                '</code></pre>';
+            return hlStr;
+        }
+        return '';
+    }
+});
+
 
 module.exports = {
     entry: {
@@ -17,7 +37,8 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
-            '@': path.join(__dirname, '../src')
+            '@': path.join(__dirname, '../src'),
+            vue:'vue/dist/vue.js'
         }
     },
     module: {
@@ -39,17 +60,21 @@ module.exports = {
                 loader: 'url-loader?limit=8192'
             },
             {
-                test: /\.less$/,
+                test: /\.(less|css)$/,
                 loader: extractLESSPlugin.extract({
-                    use: ['css-loader', 'postcss-loader'],
+                    use: ['css-loader', 'postcss-loader','less-loader'],
                     fallback: 'style-loader'
                 })
             },
             {
-                test: /\.md/,
+                test: /\.md$/,
                 loader: 'vue-markdown-loader',
                 options: md
             }
         ]
-    }
-}
+    },
+    plugins:[
+        htmlPlugin,
+        extractLESSPlugin
+    ]
+};
