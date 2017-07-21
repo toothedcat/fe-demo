@@ -6,8 +6,13 @@ export default {
     props:['message'],
     data(){
         return {
-            msg:this.message||'Hello world'
+            msg:this.message||''
         };
+    },
+    watch:{
+        message(newVal){
+            this.msg = newVal;
+        }
     }
 };
 </script>

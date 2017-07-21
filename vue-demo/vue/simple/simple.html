@@ -44,6 +44,7 @@
     <div id="app-9">
         <child-item-tow @childchange="childChangeHandler"></child-item-tow>
     </div>
+    <div id="app-10"></div>
     <script>
         var app = new Vue({
             el:"#app",
@@ -192,6 +193,46 @@
                 }
             }
         });
+        var app10 = new Vue({
+            el:'#app-10',
+            template:'\
+                <div>\
+                    <child-item :count="count"></child-item>\
+                </div>\
+            ',
+            data(){
+                return {
+                    count:1
+                }
+            },
+            mounted(){
+                setInterval(() => {
+                    this.increment();
+                }, 1000);
+            },
+            methods:{
+                increment(){
+                    this.count++;
+                }
+            },
+            components:{
+                'child-item':{
+                    props:['count'],
+                    template:'<div>{{count}},{{cnt}},{{cnt2}}</div>',
+                    data(){
+                        return {
+                            cnt:this.count || 0,
+                            cnt2:this.count || 0
+                        }
+                    },
+                    watch:{
+                        'count'(newVal) {
+                            this.cnt2 = newVal;
+                        }
+                    }
+                }
+            }
+        })
     </script>
 </body>
 </html>

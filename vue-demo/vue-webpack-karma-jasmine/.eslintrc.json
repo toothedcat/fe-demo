@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jasmine":true
     },
     "parserOptions": {
         "ecmaVersion": 6,
@@ -21,7 +22,8 @@
         "require":true
     },
     "plugins":[
-        "vue"
+        "vue",
+        "jasmine"
     ],
     "rules": {
         "indent": [//缩进

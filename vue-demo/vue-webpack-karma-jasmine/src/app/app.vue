@@ -9,15 +9,16 @@
     export default {
         data(){
             return {
-                title:'七步诗',
-                message:'煮豆燃豆萁，豆在釜中泣，本是同根生，相煎何太急'
+                title:'this is title',
+                message:'this is message'
             };
         },
         components:{
             'custom-message':Message
         },
         mounted(){
-            this.title = '七步诗 曹植';
+            this.title = '标题';
+            this.message = '这是子组件';
         },
         methods:{
             setMessage(msg){
