@@ -302,18 +302,69 @@ xdescribe('A disabled suite', () => {
     });
 });
 
-describe('Pending specs',() => {
-    xit('can be declared "xit"',() => {
+describe('Pending specs', () => {
+    xit('can be declared "xit"', () => {
         expect(true).toBe(false);
     });
     it('can be declared with "it" but without a function');
 
-    it('can be declared by calling "pending" in the spec body',() => {
+    it('can be declared by calling "pending" in the spec body', () => {
         expect(true).toBe(true);
         pending('this is why it is pending');
     });
 });
 
-describe('A spy',() => {
+describe('A spy', () => {
 
+});
+
+
+describe('Asynchronous specs', () => {
+    var value;
+    beforeEach((done) => {
+        setTimeout(function () {
+            value = 0;
+            done();
+        }, 1);
+    });
+    it('should support async execution of test preparation and expectations', (done) => {
+        value++;
+        expect(value).toBeGreaterThan(0);
+        done();
+    });
+
+    describe('long asynchronous specs', () => {
+        beforeEach((done) => {
+            done();
+        }, 1000);
+        it('takes a long time',  (done) => {
+            setTimeout( () => {
+                done();
+            }, 1000);
+        }, 2000);
+
+        afterEach( (done) => {
+            done();
+        }, 1000);
+    });
+    
+    describe('A spec using done.fail',() => {
+        var foo = function(x,callback1,callback2){
+            if(x){
+                setTimeout(() => {
+                    callback1();
+                }, 0);
+            }else{
+                setTimeout(() => {
+                    callback2();
+                }, 0);
+            }
+        };
+
+        it('should not call the second callback',(done) => {
+            foo(true,done,() => {
+                done.fail('Second callback had been called');
+            });
+        });
+    });
 });
