@@ -28,6 +28,10 @@
         <component-a></component-a>
         <component-b></component-b>
     </div>
+    <div id="example-5">
+        <custom-checkbox v-model="isChecked"></custom-checkbox>
+        <p>{{isChecked}}</p>
+    </div>
     <script>
         // 使用v-on绑定事件，实现子组件与父组件的通信
         Vue.component('btn-counter',{
@@ -193,6 +197,56 @@
         var vm4 = new Vue({
             el:'#example-4'
         });
+
+        // 定制v-model
+        Vue.component('custom-checkbox',{
+            template:`
+                <div>
+                    <input type="checkbox"  
+                        @change="onChange"
+                        :checked="innerChecked"
+                    />
+                </div>
+            `,
+            model:{
+                prop:'checked',
+                event:'change'
+            },
+            props:{
+                checked:{
+                    type:Boolean
+                },
+                defaultChecked:{
+                    type:Boolean,
+                    default:false
+                }
+            },
+            data(){
+                return {
+                    innerChecked:this.checked ? this.checked:this.defaultChecked
+                };
+            },
+            methods:{
+                onChange(e){
+                    this.innerChecked = e.target.checked;
+                    this.$emit('change',this.innerChecked);
+                }
+            },
+            watch:{
+                checked(newVal,e){
+                    this.innerChecked = newVal;
+                }
+            }
+        });
+
+        var vm5 = new Vue({
+            el:'#example-5',
+            data(){
+                return {
+                    isChecked:false
+                }
+            }
+        })
     </script>
 </body>
 </html>
