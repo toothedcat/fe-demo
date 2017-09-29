@@ -7,3 +7,5 @@ const todoApp = combineReducers({
     visibilityFilters,
     todos
 });
+
+export default todoApp;

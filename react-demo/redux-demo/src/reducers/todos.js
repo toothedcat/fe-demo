@@ -12,11 +12,16 @@ const todos = (state = [], action) => {
         case TOGGLE_TODO:
             return state.map((todo,index) => {
                 if(index === action.index){
-                    return Object.assign({}.todo,{
+                    return Object.assign({},todo,{
                         completed:!todo.completed
                     });
                 }
+                return todo;
             });
+        default:
+            return state;
     }
 };
+
+export default todos;
 

@@ -23,10 +23,10 @@ export const addTodo = (text) => {
     };
 };
 
-export const toggleTodo = (id) => {
+export const toggleTodo = (index) => {
     return {
         type:TOGGLE_TODO,
-        id
+        index
     };
 };
 
