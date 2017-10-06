@@ -1,15 +1,11 @@
-const mysql = require('mysql');
+'use strict';
+const pool = require('./mysql-pool');
 
-const connection = mysql.createConnection({
-    host : '60.205.181.95',
-    user: 'crawler',
-    password: 'crawler',
-    database:'light-chaser'
+pool.query('select * from ota_area where parent_id = 1',function(err,results){
+    if(err){
+        return;
+    }
+    for(let result of results){
+        console.log(result.name);
+    }
 });
-
-connection.query('Select * from ota_calendar_price', (err,results,fields) => {
-    if(err) {throw err;}
-    console.log(results);
-});
-
-connection.end();
